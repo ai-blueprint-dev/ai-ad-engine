@@ -1,0 +1,61 @@
+# Credentials
+.env
+.env.local
+.env.*.local
+
+# Generated creatives (may be large + contain client data)
+ads/pending/
+ads/rejected/
+!ads/pending/.gitkeep
+!ads/rejected/.gitkeep
+
+# Pipeline runtime state (can be regenerated)
+state/*.log
+state/*.jsonl
+state/winning_patterns.json
+state/losing_patterns.json
+state/research.json
+state/briefs/
+state/research/images/
+state/playbooks/
+state/tmp/
+state/config.json
+!state/.gitkeep
+
+# User-supplied screenshots dropped at repo root for testing — keep local, don't ship
+test_ad_template_for_forge.jpg
+example*.jpg
+example*.jpeg
+example*.png
+
+# Reference repos cloned for inspiration — keep local, don't ship
+.tmp-repo/
+
+# Optional Claude Code design-system skills (used to design dashboard.html, not part of pipeline).
+# These are kept locally so the original CSS comments still resolve, but they aren't shipped —
+# they're general Claude Code skills, not specific to this app.
+.claude/skills/gpt-tasteskill/
+.claude/skills/minimalist-skill/
+.claude/skills/output-skill/
+.claude/skills/redesign-skill/
+.claude/skills/soft-skill/
+.claude/skills/taste-skill/
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+*.tsbuildinfo

@@ -1,0 +1,34 @@
+{
+  "name": "ai-ad-engine",
+  "version": "1.0.0",
+  "description": "AI Ad Engine — Powered by AI Blueprint. Local-first creative pipeline with Claude Code skills.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "config": "node scripts/config.js",
+    "config:status": "node scripts/config.js status",
+    "config:test": "node scripts/config.js test all",
+    "scrape": "node scripts/scraper.js",
+    "research": "node scripts/researcher.js",
+    "forge": "node scripts/forge.js",
+    "looper": "node scripts/looper.js"
+  },
+  "keywords": [
+    "ai-ad-engine",
+    "ai-blueprint",
+    "claude-code",
+    "meta-marketing-api",
+    "fal-ai"
+  ],
+  "author": "AI Blueprint",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.9.6",
+    "cheerio": "^1.2.0",
+    "express": "^5.2.1",
+    "puppeteer": "^24.42.0"
+  }
+}
