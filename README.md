@@ -46,9 +46,14 @@ npm install                    # also installs Puppeteer's bundled Chromium (~15
 npm start                      # http://localhost:3000
 
 # 3. set your credentials via Claude Code (validates against live APIs before saving)
-#    in a separate terminal, in the same directory, open Claude Code and:
+#    in a separate terminal — IMPORTANT: from inside ai-ad-engine/, not its parent
 /config                        # walks you through the 3 keys
 ```
+
+> **⚠ Skill loading — read this if `/scraper` (or any pipeline command) doesn't autocomplete.** Claude Code auto-discovers the six pipeline skills (`/config`, `/scraper`, `/researcher`, `/forge`, `/looper`, `/publisher`) only when launched with its current working directory set to `ai-ad-engine/`. If you opened Claude Code in an IDE workspace one folder above (or in any parent shell), the skills won't be registered at startup. Two fixes, in order of preference:
+>
+> 1. **Best:** restart Claude Code from inside the project folder — `cd ai-ad-engine` then re-launch.
+> 2. **Or, ask Claude to fix it:** paste this into chat — *"Set up the AI Ad Engine skills."* Claude reads `CLAUDE.md`, registers the skills for this session, and writes a `.claude/settings.json` at your parent directory so future sessions auto-load too. One prompt, both gaps closed.
 
 The `/config` skill prompts you for each credential and validates it against the live API before writing to `.env`. If a key is wrong, it surfaces Meta or fal's error verbatim so you can fix it.
 
@@ -119,6 +124,7 @@ LOOPER never spends without your explicit `amplify` or `rewrite` command. SCRAPE
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
+| `/scraper`, `/forge`, or any pipeline slash command doesn't appear in autocomplete | Claude Code launched from outside `ai-ad-engine/` — the harness only auto-discovers skills from `<cwd>/.claude/skills/`, no recursion at startup | Either `cd ai-ad-engine` and restart Claude Code, OR paste into chat: *"Set up the AI Ad Engine skills."* — Claude reads `CLAUDE.md`, registers all six for this session, and persists via `.claude/settings.json` for future sessions |
 | Dashboard tab shows "Overview needs Meta credentials" | `.env` missing or `META_ACCESS_TOKEN` invalid | run `/config` to re-validate |
 | `/api/meta/ads` returns 502 with `(#100) Tried accessing nonexisting field` | older Meta SDK or API drift | check `lib/meta.js` insight field list against [Meta API v25 docs](https://developers.facebook.com/docs/marketing-api/reference/ads-insights/) |
 | FORGE images look like generic stock photos | running blind (no patterns saved) | save 2–3 patterns via `/researcher` before re-running `/forge` |
